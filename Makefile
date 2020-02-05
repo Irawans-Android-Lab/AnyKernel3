@@ -1,16 +1,22 @@
 DEVICE := $(shell echo ${DEVICE})
+KERNAME := $(shell echo ${KERNAME})
 BRANCH := $(shell git -C .. rev-parse --abbrev-ref HEAD)
 
 ifeq ($(findstring 10,$(BRANCH)),10)
-    NAME := Genom-AOSP-10-$(DEVICE)
-    DATE := $(shell date "+%Y%m%d")
-    ZIP := $(NAME)-$(DATE).zip
+	ACNAME := Q
 else
-    NAME := Genom-Multi-Pie-$(DEVICE)
-    DATE := $(shell date "+%Y%m%d")
-    ZIP := $(NAME)-$(DATE).zip
+ifeq ($(findstring 9,$(BRANCH)),9)
+	ACNAME := PIE
+else
+ifeq ($(findstring 8,$(BRANCH)),8)
+	ACNAME := Oreo
+else
+	ACNAME := universal
 endif
 
+NAME := ${KERNAME}-${ACNAME}-$(DEVICE)
+DATE := $(shell date "+%Y%m%d")
+ZIP := $(NAME)-$(DATE).zip
 EXCLUDE := Makefile *.git* *.jar* *placeholder* *.md*
 
 normal: $(ZIP)
