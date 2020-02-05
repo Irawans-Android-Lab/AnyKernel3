@@ -4,11 +4,9 @@ BRANCH := $(shell git -C .. rev-parse --abbrev-ref HEAD)
 
 ifeq ($(findstring 10,$(BRANCH)),10)
 	ACNAME := Q
-else
-ifeq ($(findstring 9,$(BRANCH)),9)
+else ifeq ($(findstring 9,$(BRANCH)),9)
 	ACNAME := PIE
-else
-ifeq ($(findstring 8,$(BRANCH)),8)
+else ifeq ($(findstring 8,$(BRANCH)),8)
 	ACNAME := Oreo
 else
 	ACNAME := universal
