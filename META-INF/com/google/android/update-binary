@@ -416,6 +416,26 @@ do_modules;
 debugging;
 restore_env;
 
+# begin system chages
+mount /dev/block/bootdevice/by-name/system /system_root
+ui_print "Checking wheter spectrum is exist";
+if [ -e "$home/system_root/init.spectrum.rc" ]; then
+ui_print " " "Injecting Spectrum...";
+backup_file /system_root/init.rc
+grep "import /init.spectrum.rc" /system_root/init.rc > /dev/null || sed -i '1,/.*import.*/s/.*import.*/import \/init.spectrum.rc\n&/' /system_root/init.rc
+chmod -R 755 $home/system_root/
+mv $home/system_root/* /system_root/
+chmod +x /system_root/init.spectrum.sh
+else
+ui_print "Spectrum not detected in zip, Check and remove if exist on current system...";
+local line=$(grep -n "import /init.spectrum.rc" /system_root/init.rc | head -n1 | cut -d: -f1);
+sed -i "${line}d" /system_root/init.rc;
+rm /system_root/init.spectrum.rc
+rm /system_root/init.spectrum.sh
+fi;
+umount /system_root
+# end system changes
+
 if [ "$(file_getprop anykernel.sh do.cleanup)" == 1 ]; then
   cleanup;
 fi;

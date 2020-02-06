@@ -12,15 +12,24 @@ else
 	ACNAME := universal
 endif
 
-NAME := ${KERNAME}-${ACNAME}-$(DEVICE)
+ifeq ($(findstring eas,$(BRANCH)),eas)
+	VARIANT := EAS
+else
+	VARIANT := HMP
+endif
+
+NAME := ${KERNAME}-${VARIANT}-${ACNAME}-$(DEVICE)
 DATE := $(shell date "+%Y%m%d")
 ZIP := $(NAME)-$(DATE).zip
 EXCLUDE := Makefile *.git* *.jar* *placeholder* *.md*
+ifeq ($(findstring eas,$(BRANCH)),eas)
+EXCLUDE += system_root
+endif
 
 normal: $(ZIP)
 
 $(ZIP):
-	sed -i 's/universal/${DEVICE}/g' anykernel.sh
+	sed -i 's/universal/${DEVICE}-${VARIANT}/g' anykernel.sh
 	zip -r9 "$@" . -x $(EXCLUDE)
 	echo "Done creating ZIP: $(ZIP)"
 
