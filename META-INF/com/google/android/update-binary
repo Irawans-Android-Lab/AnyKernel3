@@ -427,11 +427,15 @@ chmod -R 755 $home/system_root/
 mv $home/system_root/* /system_root/
 chmod +x /system_root/init.spectrum.sh
 else
+if [ -e /system_root/init.spectrum.rc ]; then
 ui_print "Spectrum not detected in zip, Check and remove if exist on current system...";
 local line=$(grep -n "import /init.spectrum.rc" /system_root/init.rc | head -n1 | cut -d: -f1);
 sed -i "${line}d" /system_root/init.rc;
 rm /system_root/init.spectrum.rc
 rm /system_root/init.spectrum.sh
+else
+ui_print "Spectrum not found, Skip";
+fi; # spectrum.rc
 fi;
 umount /system_root
 # end system changes
