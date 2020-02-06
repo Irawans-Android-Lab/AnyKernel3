@@ -419,12 +419,12 @@ restore_env;
 # begin system chages
 mount /dev/block/bootdevice/by-name/system /system_root
 ui_print "Checking wheter spectrum is exist";
-if [ -e $home/system_root/init.spectrum.rc ]; then
+if [ -e $AKHOME/system_root/init.spectrum.rc ]; then
 ui_print " " "Injecting Spectrum...";
 backup_file /system_root/init.rc
 grep "import /init.spectrum.rc" /system_root/init.rc > /dev/null || sed -i '1,/.*import.*/s/.*import.*/import \/init.spectrum.rc\n&/' /system_root/init.rc
-chmod -R 755 $home/system_root/
-mv $home/system_root/* /system_root/
+chmod -R 755 $AKHOME/system_root/
+mv $AKHOME/system_root/* /system_root/
 chmod +x /system_root/init.spectrum.sh
 else
 if [ -e /system_root/init.spectrum.rc ]; then
