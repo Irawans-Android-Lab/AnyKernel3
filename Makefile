@@ -6,25 +6,14 @@ ifeq ($(findstring 10,$(BRANCH)),10)
 	ACNAME := Q
 else ifeq ($(findstring 9,$(BRANCH)),9)
 	ACNAME := PIE
-else ifeq ($(findstring 8,$(BRANCH)),8)
-	ACNAME := Oreo
 else
 	ACNAME := universal
 endif
 
-ifeq ($(findstring eas,$(BRANCH)),eas)
-	VARIANT := EAS
-else
-	VARIANT := HMP
-endif
-
-NAME := ${KERNAME}-${VARIANT}-${ACNAME}-$(DEVICE)
+NAME := ${KERNAME}-${ACNAME}-$(DEVICE)
 DATE := $(shell date "+%Y%m%d")
 ZIP := $(NAME)-$(DATE).zip
 EXCLUDE := Makefile *.git* *.jar* *placeholder* *.md*
-ifeq ($(findstring eas,$(BRANCH)),eas)
-EXCLUDE += system_root
-endif
 
 normal: $(ZIP)
 
