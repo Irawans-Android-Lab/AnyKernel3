@@ -1,6 +1,6 @@
 DEVICE := $(shell echo ${DEVICE})
 KERNAME := $(shell echo ${KERNAME})
-BRANCH := $(shell git -C .. rev-parse --abbrev-ref HEAD)
+BRANCH := $(shell git symbolic-ref -q HEAD)
 
 ifeq ($(findstring 10,$(BRANCH)),10)
 	ACNAME := Q
