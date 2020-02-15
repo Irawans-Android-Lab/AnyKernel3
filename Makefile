@@ -6,8 +6,6 @@ ifeq ($(findstring 10,$(BRANCH)),10)
 	ACNAME := Q
 else ifeq ($(findstring 9,$(BRANCH)),9)
 	ACNAME := PIE
-else
-	ACNAME := universal
 endif
 
 NAME := ${KERNAME}-${ACNAME}-$(DEVICE)
@@ -18,7 +16,7 @@ EXCLUDE := Makefile *.git* *.jar* *placeholder* *.md*
 normal: $(ZIP)
 
 $(ZIP):
-	sed -i 's/universal/${DEVICE}-${VARIANT}/g' anykernel.sh
+	sed -i 's/universal/${DEVICE}/g' anykernel.sh
 	zip -r9 "$@" . -x $(EXCLUDE)
 	echo "Done creating ZIP: $(ZIP)"
 
