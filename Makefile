@@ -9,7 +9,7 @@ else ifeq ($(findstring 9,$(BRANCH)),9)
 endif
 
 NAME := ${KERNAME}-${ACNAME}-$(DEVICE)
-DATE := $(shell date "+%Y%m%d")
+DATE := $(shell date "+%Y%m%d-%T")
 ZIP := $(NAME)-$(DATE).zip
 EXCLUDE := Makefile *.git* *.jar* *placeholder* *.md*
 
