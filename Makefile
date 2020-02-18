@@ -1,12 +1,6 @@
 DEVICE := $(shell echo ${DEVICE})
 KERNAME := $(shell echo ${KERNAME})
-BRANCH := $(shell git symbolic-ref -q HEAD)
-
-ifeq ($(findstring 10,$(BRANCH)),10)
-	ACNAME := Q
-else ifeq ($(findstring 9,$(BRANCH)),9)
-	ACNAME := PIE
-endif
+ACNAME := $(shell echo ${ACNAME})
 
 NAME := ${KERNAME}-${ACNAME}-$(DEVICE)
 DATE := $(shell date "+%Y%m%d-%T")
