@@ -3,7 +3,7 @@ KERNAME := $(shell echo ${KERNAME})
 ACNAME := $(shell echo ${ACNAME})
 
 NAME := ${KERNAME}-${ACNAME}-$(DEVICE)
-DATE := $(shell date "+%Y%m%d-%T")
+DATE := $(shell date "+%Y%m%d-%H-%M-%S")
 ZIP := $(NAME)-$(DATE).zip
 EXCLUDE := Makefile *.git* *.jar* *placeholder* *.md*
 
