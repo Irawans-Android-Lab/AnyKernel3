@@ -19,7 +19,7 @@ else
 endif
 
 NAME := ${KERNAME}-${VARIANT}-${ACNAME}-$(DEVICE)
-DATE := $(shell date "+%Y%m%d")
+DATE := $(shell date "+%Y%m%d-%H-%M-%S")
 ZIP := $(NAME)-$(DATE).zip
 EXCLUDE := Makefile *.git* *.jar* *placeholder* *.md*
 ifeq ($(findstring eas,$(BRANCH)),eas)
