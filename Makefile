@@ -4,7 +4,7 @@ KERNAME := $(shell echo ${KERNAME})
 NAME := ${KERNAME}-$(CODENAME)-$(DEVICE)
 DATE := $(shell date "+%Y%m%d-%H%M%S")
 ZIP := $(NAME)-$(DATE).zip
-EXCLUDE := Makefile *.git* *.jar* *placeholder* *.md*
+EXCLUDE := Makefile *.git* *.jar* *placeholder* *.md* *.zip
 
 normal: $(ZIP)
 
