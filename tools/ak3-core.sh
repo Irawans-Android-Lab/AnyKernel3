@@ -157,7 +157,7 @@ unpack_ramdisk() {
   if [ -f ramdisk.cpio ]; then
     comp=$(magiskboot decompress ramdisk.cpio 2>&1 | grep -v 'raw' | sed -n 's;.*\[\(.*\)\];\1;p');
   else
-    echo "No ramdisk found to unpack. But not aborting :)...";
+    abort "No ramdisk found to unpack. Aborting...";
   fi;
   if [ "$comp" ]; then
     mv -f ramdisk.cpio ramdisk.cpio.$comp;
@@ -175,7 +175,7 @@ unpack_ramdisk() {
   cd $RAMDISK;
   EXTRACT_UNSAFE_SYMLINKS=1 cpio -d -F $SPLITIMG/ramdisk.cpio -i;
   if [ $? != 0 -o ! "$(ls)" ]; then
-    echo "Unpacking ramdisk failed. But not aborting :)...";
+    abort "Unpacking ramdisk failed. Aborting...";
   fi;
   if [ -d "$AKHOME/rdtmp" ]; then
     cp -af $AKHOME/rdtmp/* .;
@@ -232,7 +232,7 @@ repack_ramdisk() {
     fi;
   fi;
   if [ "$packfail" ]; then
-    echo "Repacking ramdisk failed. But not aborting :)...";
+    abort "Repacking ramdisk failed. Aborting...";
   fi;
 
   if [ -f "$BIN/mkmtkhdr" -a -f "$SPLITIMG/boot.img-base" ]; then
